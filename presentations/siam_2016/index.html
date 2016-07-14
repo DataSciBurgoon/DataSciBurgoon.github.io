@@ -79,21 +79,26 @@
     </div>
 
     <div id="challenge" class="step" data-x="0" data-y="-1500" data-z="-5000">
-        <img src="assets/urban_combat.jpg" height="100%" width="100%"></img>
+        <img src="assets/depleted_uranium_tank.jpg" height="100%" width="100%"></img>
     </div>
 
-    <div class="step" data-x="1000" data-y="-1500" data-z="-5000">
+    <div class="step" data-x="1500" data-y="-1500" data-z="-5000">
         Animal tests are:
             <ul>
                 <font size="5"><li>too expensive</li></font>
                 <font size="5"><li>take too long</li></font>
-                <font size="5"><li>they aren't relevant to humans or other species</li></font>
+                <font size="5"><li>they are less relevant to humans or other species than desired</li></font>
+                <font size="5"><li>there are ethical constraints</li></font>
             </ul>
         
     </div>
 
+    <div class="step" data-x="2500" data-y="-1500" data-z="-5000">
+        <p>Over past decade we've seen recent advances in alternative to animal assay technologies and a push by national and international regulatory bodies to adopt these alternative approaches</p>
+    </div>
+
     <div class="step" data-x="3000" data-y="0" data-z="-3000" data-rotate="90">
-        <p>High throughput screening (HTS) in vitro assays and computational models</p>
+        <p>Today we are seeing interest by US and other governments to make decisions using these in vitro high throughput screening tests and computational models</p>
     </div>
 
     <div class="step" data-x="3000" data-y="1000" data-z="-3000" data-rotate="90">
@@ -116,7 +121,7 @@
                     <li>US EPA ToxCast</li>
                     <ul>
                         <li style="margin-left: 20px;">In vitro high throughput screening</li>
-                        <li style="margin-left: 20px">Used the data provider's "hit" calls</li>
+                        <li style="margin-left: 20px">Used the data provider's "hit" calls (active in the assay)</li>
                     </ul>
                     <li>US NICEATM Uterotrophic Database</li>
                     <ul>
@@ -159,12 +164,38 @@
     </div>
 
     <div class="slide step" data-x="2000" data-y="3000" data-z="2000" data-rotate="90">
+        <img src="assets/bayes_net_amitrole_posterior_probs.png" height="100%" width="100%">
+    </div>
+
+    <div class="slide step" data-x="2000" data-y="4500" data-z="2000" data-rotate="90">
         <img src="assets/overview_bayesian_game_probs_emphasis.png" width="100%" height="100%">
     </div>
 
-    <div class="step" data-x="2000" data-y="4500" data-z="2000" data-rotate="90">
-        <p>Next Steps<br/>
-            lyle.d.burgoon@usace.army.mil</p>
+    <div class="step" data-x="2000" data-y="6000" data-z="2000" data-rotate="90">
+        <p>Summary/Conclusions:
+            <font size="5">
+                <ul>
+                    <li>The Bayesian Signaling game is a flexible approach for using HTS data to make Go/No-Go decisions</li>
+                    <li>Data integration using the Bayesian Network approach identified potential problematic assays</li>
+                    <li>Combining the Bayesian Signaling game with the Bayesian Network helped identify that we needed to improve our data integration strategy</li>
+                </ul>
+            </font>
+    </div>
+
+    <div class="step" data-x="2000" data-y="7500" data-z="2000" data-rotate="90">
+        <p>Next Steps:
+            <font size="5">
+                <ul>
+                    <li>Generate own hit calls using comparison to estrogen</li>
+                    <li>Package this approach up as much as possible into an R package</li>
+                </ul>
+            </font>
+        </p>
+    </div>
+
+    <div class="step" data-x="2000" data-y="9000" data-z="3000" data-rotate="90">
+        email: lyle.d.burgoon@usace.army.mil<br/>
+        twitter: @DataSciBurgoon
     </div>
 
 </div>
