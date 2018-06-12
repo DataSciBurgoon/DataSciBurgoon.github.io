@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+		<title>Maumee and Detroit Rivers Hazard Indices</title>
+
+		<!-- Google fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+		<!-- D3.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+		<!-- Bootstrap core CSS -->
+
+		<style>
+			body {
+				font-family: 'Open Sans', sans-serif;
+				font-size: 11px;
+				font-weight: 300;
+				fill: #242424;
+				text-align: center;
+				text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+				cursor: default;
+			}
+
+			.legend {
+				font-family: 'Raleway', sans-serif;
+				fill: #333333;
+			}
+
+			.tooltip {
+				fill: #333333;
+			}
+		</style>
+
+		<link href="dist/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="dist/css/bootstrap-grid.min.css" rel="stylesheet"/>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm text-center my-auto">
+					<h1>Swan Creek</h1>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="swanc0_radarChart"><h3>Day 0</h3></div>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="swanc4_radarChart"><h3>Day 4</h3></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm text-center my-auto">
+					<h1>Clark Oil</h1>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="clarko0_radarChart"><h3>Day 0</h3></div>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="clarko4_radarChart"><h3>Day 4</h3></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm text-center my-auto">
+					<h1>Toledo</h1>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="toledo0_radarChart"><h3>Day 0</h3></div>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="toledo4_radarChart"><h3>Day 4</h3></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm text-center my-auto">
+					<h1>Wyandotte</h1>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="wyand0_radarChart"><h3>Day 0</h3></div>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="wyand4_radarChart"><h3>Day 4</h3></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm text-center my-auto">
+					<h1>Grosse Ile</h1>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="grosil0_radarChart"><h3>Day 0</h3></div>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="grosil4_radarChart"><h3>Day 4</h3></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm text-center my-auto">
+					<h1>Trenton</h1>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="trentn0_radarChart"><h3>Day 0</h3></div>
+				</div>
+				<div class="col-sm text-center my-auto">
+					<div class="trentn4_radarChart"><h3>Day 4</h3></div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<script src="radarChart.js"></script>
+		<script>
+
+      /* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
+
+			//////////////////////////////////////////////////////////////
+			//////////////////////// Set-Up //////////////////////////////
+			//////////////////////////////////////////////////////////////
+
+			var margin = {top: 100, right: 100, bottom: 100, left: 100},
+				//width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
+				//height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+				width = 400 - margin.left - margin.right,
+				height = 400 - margin.left - margin.right;
+
+			//////////////////////////////////////////////////////////////
+			////////////////////////// Data //////////////////////////////
+			//////////////////////////////////////////////////////////////
+
+      var data = [
+        [//SWANCO
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:10.5791},
+          {axis:"Isophorone", value:2035.073},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:26.9781},
+          {axis:"Prometon", value:38.0931},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:0.3894},
+          {axis:"Bromacil", value:1.3654},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ],
+        [//SWANC4
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:42.3164},
+          {axis:"Isophorone", value:2261.1923},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:226.1922},
+          {axis:"Prometon", value:123.0702},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:2.1456},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ],
+        [//CLARKO0
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:87.8429},
+          {axis:"Isophorone", value:1401.9392},
+          {axis:"4-Androstene-3,17-dione", value:13.5961},
+          {axis:"Triclosan", value:26.9781},
+          {axis:"Prometon", value:9.5233},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:0.3894},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ],
+        [//CLARKO4
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:10.5791},
+          {axis:"Isophorone", value:2125.5207},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:26.9781},
+          {axis:"Prometon", value:45.4188},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:0.3894},
+          {axis:"Bromacil", value:2.5369},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ],
+        [//TOLEDO0
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:166.493},
+          {axis:"Isophorone", value:3482.2361},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:574.9051},
+          {axis:"Prometon", value:80.5817},
+          {axis:"Diphenhydramine", value:14.4927},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:13.9064},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:2.0499},
+          {axis:"4-Nonylphenol", value:3.1137},
+          {axis:"1,4-Dichlorobenzene", value:2.534}
+        ],
+        [//TOLEDO4
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:10.5791},
+          {axis:"Isophorone", value:2555.1472},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:334.5759},
+          {axis:"Prometon", value:120.4329},
+          {axis:"Diphenhydramine", value:8.0515},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:4.5851},
+          {axis:"Bromacil", value:2.1846},
+          {axis:"Benzophenone", value:0.8089},
+          {axis:"4-Nonylphenol", value:1.7469},
+          {axis:"1,4-Dichlorobenzene", value:0.4973}
+        ],
+        [//WYAND0
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:351.2258},
+          {axis:"Isophorone", value:1469.775},
+          {axis:"4-Androstene-3,17-dione", value:45.5034},
+          {axis:"Triclosan", value:1234.6322},
+          {axis:"Prometon", value:9.5233},
+          {axis:"Diphenhydramine", value:15.8809},
+          {axis:"Propofol", value:1.1645},
+          {axis:"Menthol", value:55.3935},
+          {axis:"Bisphenol A", value:7.0724},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:1.9488},
+          {axis:"4-Nonylphenol", value:6.1348},
+          {axis:"1,4-Dichlorobenzene", value:0.8934}
+        ],
+        [//WYAND4
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:318.8319},
+          {axis:"Isophorone", value:2057.685},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:664.4395},
+          {axis:"Prometon", value:9.5233},
+          {axis:"Diphenhydramine", value:14.2706},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:5.1652},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:3.0314},
+          {axis:"1,4-Dichlorobenzene", value:0.6237}
+        ],
+        [//GROSIL0
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:10.5791},
+          {axis:"Isophorone", value:904.4769},
+          {axis:"4-Androstene-3,17-dione", value:8.3953},
+          {axis:"Triclosan", value:26.9781},
+          {axis:"Prometon", value:9.5233},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:6.246},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ],
+        [//GROSIL4
+          {axis:"17-beta-Estradiol", value:39687.9432},
+          {axis:"Estrone", value:358.6676},
+          {axis:"Isophorone", value:1401.9392},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:26.9781},
+          {axis:"Prometon", value:9.5233},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:1.9707},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ],
+        [//TRENTN0
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:239.4522},
+          {axis:"Isophorone", value:2871.7142},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:490.083},
+          {axis:"Prometon", value:9.5233},
+          {axis:"Diphenhydramine", value:12.105},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:5.936},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:0.9882},
+          {axis:"4-Nonylphenol", value:1.9011},
+          {axis:"1,4-Dichlorobenzene", value:0.4298}
+        ]
+      ];
+
+			var swanc0_data = [
+        [//SWANCO
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:10.5791},
+          {axis:"Isophorone", value:2035.073},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:26.9781},
+          {axis:"Prometon", value:38.0931},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:0.3894},
+          {axis:"Bromacil", value:1.3654},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ]];
+
+			var swanc4_data = [
+				[//SWANC4
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:42.3164},
+          {axis:"Isophorone", value:2261.1923},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:226.1922},
+          {axis:"Prometon", value:123.0702},
+          {axis:"Diphenhydramine", value:2.0129},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:2.1456},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:0.1189},
+          {axis:"4-Nonylphenol", value:0.2852},
+          {axis:"1,4-Dichlorobenzene", value:0.0386}
+        ]
+			];
+
+			var clarko0_data = [[//CLARKO0
+				{axis:"17-beta-Estradiol", value:704.5984},
+				{axis:"Estrone", value:87.8429},
+				{axis:"Isophorone", value:1401.9392},
+				{axis:"4-Androstene-3,17-dione", value:13.5961},
+				{axis:"Triclosan", value:26.9781},
+				{axis:"Prometon", value:9.5233},
+				{axis:"Diphenhydramine", value:2.0129},
+				{axis:"Propofol", value:0.2911},
+				{axis:"Menthol", value:1.056},
+				{axis:"Bisphenol A", value:0.3894},
+				{axis:"Bromacil", value:0.3391},
+				{axis:"Benzophenone", value:0.1189},
+				{axis:"4-Nonylphenol", value:0.2852},
+				{axis:"1,4-Dichlorobenzene", value:0.0386}
+			]];
+
+			var clarko4_data = [[//CLARKO4
+				{axis:"17-beta-Estradiol", value:704.5984},
+				{axis:"Estrone", value:10.5791},
+				{axis:"Isophorone", value:2125.5207},
+				{axis:"4-Androstene-3,17-dione", value:2.0988},
+				{axis:"Triclosan", value:26.9781},
+				{axis:"Prometon", value:45.4188},
+				{axis:"Diphenhydramine", value:2.0129},
+				{axis:"Propofol", value:0.2911},
+				{axis:"Menthol", value:1.056},
+				{axis:"Bisphenol A", value:0.3894},
+				{axis:"Bromacil", value:2.5369},
+				{axis:"Benzophenone", value:0.1189},
+				{axis:"4-Nonylphenol", value:0.2852},
+				{axis:"1,4-Dichlorobenzene", value:0.0386}
+			]];
+
+			var toledo0_data = [[
+				//TOLEDO0
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:166.493},
+          {axis:"Isophorone", value:3482.2361},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:574.9051},
+          {axis:"Prometon", value:80.5817},
+          {axis:"Diphenhydramine", value:14.4927},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:13.9064},
+          {axis:"Bromacil", value:0.3391},
+          {axis:"Benzophenone", value:2.0499},
+          {axis:"4-Nonylphenol", value:3.1137},
+          {axis:"1,4-Dichlorobenzene", value:2.534}
+        ]];
+
+			var toledo4_data = [[
+				//TOLEDO4
+          {axis:"17-beta-Estradiol", value:704.5984},
+          {axis:"Estrone", value:10.5791},
+          {axis:"Isophorone", value:2555.1472},
+          {axis:"4-Androstene-3,17-dione", value:2.0988},
+          {axis:"Triclosan", value:334.5759},
+          {axis:"Prometon", value:120.4329},
+          {axis:"Diphenhydramine", value:8.0515},
+          {axis:"Propofol", value:0.2911},
+          {axis:"Menthol", value:1.056},
+          {axis:"Bisphenol A", value:4.5851},
+          {axis:"Bromacil", value:2.1846},
+          {axis:"Benzophenone", value:0.8089},
+          {axis:"4-Nonylphenol", value:1.7469},
+          {axis:"1,4-Dichlorobenzene", value:0.4973}
+			]];
+
+			var wyand0_data = [[//WYAND0
+				{axis:"17-beta-Estradiol", value:704.5984},
+				{axis:"Estrone", value:351.2258},
+				{axis:"Isophorone", value:1469.775},
+				{axis:"4-Androstene-3,17-dione", value:45.5034},
+				{axis:"Triclosan", value:1234.6322},
+				{axis:"Prometon", value:9.5233},
+				{axis:"Diphenhydramine", value:15.8809},
+				{axis:"Propofol", value:1.1645},
+				{axis:"Menthol", value:55.3935},
+				{axis:"Bisphenol A", value:7.0724},
+				{axis:"Bromacil", value:0.3391},
+				{axis:"Benzophenone", value:1.9488},
+				{axis:"4-Nonylphenol", value:6.1348},
+				{axis:"1,4-Dichlorobenzene", value:0.8934}
+			]];
+
+			var wyand4_data = [[//WYAND4
+				{axis:"17-beta-Estradiol", value:704.5984},
+				{axis:"Estrone", value:318.8319},
+				{axis:"Isophorone", value:2057.685},
+				{axis:"4-Androstene-3,17-dione", value:2.0988},
+				{axis:"Triclosan", value:664.4395},
+				{axis:"Prometon", value:9.5233},
+				{axis:"Diphenhydramine", value:14.2706},
+				{axis:"Propofol", value:0.2911},
+				{axis:"Menthol", value:1.056},
+				{axis:"Bisphenol A", value:5.1652},
+				{axis:"Bromacil", value:0.3391},
+				{axis:"Benzophenone", value:0.1189},
+				{axis:"4-Nonylphenol", value:3.0314},
+				{axis:"1,4-Dichlorobenzene", value:0.6237}
+			]];
+
+			var grosil0_data = [[//GROSIL0
+				{axis:"17-beta-Estradiol", value:704.5984},
+				{axis:"Estrone", value:10.5791},
+				{axis:"Isophorone", value:904.4769},
+				{axis:"4-Androstene-3,17-dione", value:8.3953},
+				{axis:"Triclosan", value:26.9781},
+				{axis:"Prometon", value:9.5233},
+				{axis:"Diphenhydramine", value:2.0129},
+				{axis:"Propofol", value:0.2911},
+				{axis:"Menthol", value:1.056},
+				{axis:"Bisphenol A", value:6.246},
+				{axis:"Bromacil", value:0.3391},
+				{axis:"Benzophenone", value:0.1189},
+				{axis:"4-Nonylphenol", value:0.2852},
+				{axis:"1,4-Dichlorobenzene", value:0.0386}
+			]];
+
+			var grosil4_data = [[//GROSIL4
+				{axis:"17-beta-Estradiol", value:39687.9432},
+				{axis:"Estrone", value:358.6676},
+				{axis:"Isophorone", value:1401.9392},
+				{axis:"4-Androstene-3,17-dione", value:2.0988},
+				{axis:"Triclosan", value:26.9781},
+				{axis:"Prometon", value:9.5233},
+				{axis:"Diphenhydramine", value:2.0129},
+				{axis:"Propofol", value:0.2911},
+				{axis:"Menthol", value:1.056},
+				{axis:"Bisphenol A", value:1.9707},
+				{axis:"Bromacil", value:0.3391},
+				{axis:"Benzophenone", value:0.1189},
+				{axis:"4-Nonylphenol", value:0.2852},
+				{axis:"1,4-Dichlorobenzene", value:0.0386}
+			]];
+
+			var trentn0_data = [[//TRENTN0
+				{axis:"17-beta-Estradiol", value:704.5984},
+				{axis:"Estrone", value:152.640729},
+				{axis:"Isophorone", value:1492.386888},
+				{axis:"4-Androstene-3,17-dione", value:2.0988},
+				{axis:"Triclosan", value:556.055717},
+				{axis:"Prometon", value:9.5233},
+				{axis:"Diphenhydramine", value:15.82533617},
+				{axis:"Propofol", value:1.967639024},
+				{axis:"Menthol", value:1.056},
+				{axis:"Bisphenol A", value:7.167749776},
+				{axis:"Bromacil", value:4.66863958},
+				{axis:"Benzophenone", value:1.263956528},
+				{axis:"4-Nonylphenol", value:2.137425204},
+				{axis:"1,4-Dichlorobenzene", value:0.679860717}
+			]];
+
+			var trentn4_data = [[//TRENTN4
+				{axis:"17-beta-Estradiol", value:704.5984},
+				{axis:"Estrone", value:239.4522},
+				{axis:"Isophorone", value:2871.7142},
+				{axis:"4-Androstene-3,17-dione", value:2.0988},
+				{axis:"Triclosan", value:490.083},
+				{axis:"Prometon", value:9.5233},
+				{axis:"Diphenhydramine", value:12.105},
+				{axis:"Propofol", value:0.2911},
+				{axis:"Menthol", value:1.056},
+				{axis:"Bisphenol A", value:5.936},
+				{axis:"Bromacil", value:0.3391},
+				{axis:"Benzophenone", value:0.9882},
+				{axis:"4-Nonylphenol", value:1.9011},
+				{axis:"1,4-Dichlorobenzene", value:0.4298}
+			]];
+
+
+
+			//////////////////////////////////////////////////////////////
+			//////////////////// Draw the Chart //////////////////////////
+			//////////////////////////////////////////////////////////////
+
+			var color = d3.scale.ordinal()
+				.range(["#EDC951","#CC333F","#00A0B0"]);
+
+			var radarChartOptions = {
+			  w: width,
+			  h: height,
+			  margin: margin,
+			  maxValue: 5.0,
+			  levels: 5,
+			  roundStrokes: true,
+			  color: color
+			};
+			//Call function to draw the Radar chart
+			//RadarChart(".radarChart", data, radarChartOptions);
+			RadarChart(".swanc0_radarChart", swanc0_data, radarChartOptions);
+			RadarChart(".swanc4_radarChart", swanc4_data, radarChartOptions);
+
+			RadarChart(".clarko0_radarChart", clarko0_data, radarChartOptions);
+			RadarChart(".clarko4_radarChart", clarko4_data, radarChartOptions);
+
+			RadarChart(".toledo0_radarChart", toledo0_data, radarChartOptions);
+			RadarChart(".toledo4_radarChart", toledo4_data, radarChartOptions);
+
+			RadarChart(".wyand0_radarChart", wyand0_data, radarChartOptions);
+			RadarChart(".wyand4_radarChart", wyand4_data, radarChartOptions);
+
+			RadarChart(".grosil0_radarChart", grosil0_data, radarChartOptions);
+			RadarChart(".grosil4_radarChart", grosil4_data, radarChartOptions);
+
+			RadarChart(".trentn0_radarChart", trentn0_data, radarChartOptions);
+			RadarChart(".trentn4_radarChart", trentn4_data, radarChartOptions);
+		</script>
+	</body>
+</html>
